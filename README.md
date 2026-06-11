@@ -1,36 +1,63 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# 🩺 Clinical Simulation Suite (AI Patient Simulator)
 
-## Getting Started
+An advanced, interactive clinical training platform bootstrapped with [Next.js](https://nextjs.org/) and powered by **Google Gemini AI**. This suite is designed for medical students and healthcare practitioners to hone their patient consultation, history taking, and diagnostic skills by engaging in realistic dialogues with AI-simulated patient cases.
 
-First, run the development server:
+---
 
+## 🌟 Key Features
+
+### 1. 🌐 Bilingual Clinical Dialogue (`fig_bilingual`)
+The simulation suite mimics diverse, localized patient cases (such as South, West, East, North, and Central India). The simulation supports **bilingual consults** (English and Hindi), helping clinicians practice communicating in languages and colloquial terminology commonly encountered in clinical practice.
+<p align="center">
+  <img src="screenshot/fig_bilingual.png" alt="fig_bilingual" width="800" />
+</p>
+
+### 2. 📊 Live Vitals Telemetry (`fig_vitals`)
+Includes an interactive Electronic Health Record (EHR) featuring a real-time **Vitals Telemetry Plot**. It simulates and visualizes patient vital signs such as Pulse (BPM), Blood Pressure (mmHg), Respiration Rate, and Temperature.
+<p align="center">
+  <img src="screenshot/fig_vitals.png" alt="fig_vitals" width="800" />
+</p>
+
+### 3. 🏆 Performance Feedback & Scoring Dashboard (`fig_scoring`)
+After concluding a consultation, the system evaluates the clinician's performance. It scores the interaction based on history-taking details, differential diagnoses, and alignment with Standard Treatment Guidelines (STG) & ICMR guidelines, identifying areas of strength and improvement.
+<p align="center">
+  <img src="screenshot/fig_scoring.png" alt="fig_scoring" width="800" />
+</p>
+
+---
+
+## 🛠️ Technology Stack
+
+- **Framework:** Next.js (App Router, React 19)
+- **Styling:** CSS & TailwindCSS
+- **Icons:** Lucide React
+- **AI Engine:** Google Gemini Pro API (`@google/generative-ai`) or Local Mock mode for offline use
+- **Speech Capabilities:** Browser-native Text-to-Speech (TTS) with accent-appropriate voice selection
+
+---
+
+## 🚀 Getting Started
+
+### 1. Install Dependencies
+Clone the repository and install the project dependencies:
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+npm install
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+### 2. Configure Environment & API Key
+You can run the app in **Local Mock Simulator** mode (no API key required), or unlock full AI clinical responsiveness by providing a Google AI Studio API key in the in-app settings modal.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+To run the Next.js dev server, use:
+```bash
+npm run dev
+```
+Open [http://localhost:3000](http://localhost:3000) with your browser to start the simulation.
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+---
 
-## Learn More
+## 👨‍💻 Author
 
-To learn more about Next.js, take a look at the following resources:
+Developed with passion by **Kartikey**. Let's connect!
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+* **GitHub:** [KeyToCoding](https://github.com/KeyToCoding)
+* **LinkedIn:** [Kartikey's Profile](https://www.linkedin.com/in/kartikey28/)
