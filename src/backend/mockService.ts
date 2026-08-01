@@ -72,7 +72,81 @@ export function getMockResponse(
     return `Hello doctor. Thank you. My name is ${firstName}. I am rather nervous today.`;
   }
 
-  // 2. CHIEF COMPLAINT (What happened?)
+  // 2. PRESCRIBING MEDICINE / TREATMENT (Doctor offers medicine/prescription)
+  const isPrescribing = 
+    (words.some(w => ["medicine", "medicines", "prescription", "prescribe", "dawa", "dawai", "dava", "davai", "prescribing", "suji"].includes(w)) &&
+     words.some(w => ["give", "giving", "write", "prescribe", "prescribed", "start", "starting", "de", "doonga", "dungi", "likh", "chalu", "shuru", "prescribing"].includes(w))) ||
+    query.includes("prescribing") || 
+    query.includes("will give") ||
+    query.includes("dawa de") ||
+    query.includes("dawa likh") ||
+    query.includes("dawai de") ||
+    query.includes("prescription de") ||
+    query.includes("prescription likh");
+
+  if (isPrescribing) {
+    if (isHindiScript) {
+      return `ठीक है डॉक्टर, क्या इससे मेरा दर्द कम हो जाएगा? कौन सी दवाई है ये?`;
+    }
+    if (isHinglish) {
+      return `Theek hai doctor, kya isse mera dard kam ho jayega? Kaun si dawai hai ye?`;
+    }
+    return `Okay doctor, will that help with the pain? What medicine is it?`;
+  }
+
+  // 3. DIET / FOOD / DRINK (Doctor asks about food/eating)
+  const asksFood = words.some(w => 
+    ["eat", "eaten", "ate", "food", "dinner", "lunch", "breakfast", "drink", "drinking", "खाया", "खाना", "पिया", "खाते"].includes(w) ||
+    w.includes("khay") || w.includes("khaay") || w.includes("khate") || w.includes("peey") || w.includes("piya")
+  );
+  if (asksFood) {
+    if (isHindiScript) {
+      return `मैंने कुछ भारी या नया नहीं खाया डॉक्टर, बस सामान्य घर का खाना ही खाया था।`;
+    }
+    if (isHinglish) {
+      return `Maine kuch bhaari ya naya nahi khaya doctor, bas normal ghar ka khana hi khaya tha.`;
+    }
+    return `I didn't eat anything heavy or unusual doctor, just normal home-cooked food.`;
+  }
+
+  // 4. REASSURANCE / EMPATHY (Doctor reassures patient)
+  const isReassurance = 
+    query.includes("don't worry") || 
+    query.includes("no need to worry") || 
+    query.includes("not a big") || 
+    query.includes("not serious") ||
+    query.includes("everything will be") ||
+    query.includes("all will be") ||
+    query.includes("chinta") || 
+    query.includes("daro mat") || 
+    query.includes("ghabrao mat") ||
+    query.includes("koi baat nahi") ||
+    words.some(w => ["relax", "calm", "daro", "ghabrao", "darna", "ghabrana"].includes(w));
+  if (isReassurance) {
+    if (isHindiScript) {
+      return `आपकी बात सुनकर थोड़ा हौसला मिला डॉक्टर, लेकिन दर्द बहुत तेज है।`;
+    }
+    if (isHinglish) {
+      return `Aapki baat sunkar thoda hausla mila doctor, lekin dard bohot tej hai.`;
+    }
+    return `Hearing that gives me some comfort, doctor, but the pain is still very sharp.`;
+  }
+
+  // 5. HISTORY & MEDICATIONS
+  const asksHistory = words.some(w => 
+    ["medication", "medications", "medicine", "medicines", "history", "past", "dawa", "dawai", "dava", "davai", "itihas", "pehle", "दवा", "दवाई", "इतिहास", "पहले"].includes(w)
+  );
+  if (asksHistory) {
+    if (isHindiScript) {
+      return `डॉक्टर, मेरे केस की डिटेल्स और हिस्ट्री यह है: ${history}`;
+    }
+    if (isHinglish) {
+      return `Doctor, mere case ki details aur history yeh hai: ${history}`;
+    }
+    return `Here are my medical history details, doctor: ${history}`;
+  }
+
+  // 6. CHIEF COMPLAINT (What happened?)
   const asksComplaint = 
     query.includes("bring you") || 
     query.includes("brings you") ||
@@ -90,21 +164,7 @@ export function getMockResponse(
     return `Doctor, I came in because of this: "${complaint}". I'm really worried about it.`;
   }
 
-  // 3. HISTORY & MEDICATIONS
-  const asksHistory = words.some(w => 
-    ["medication", "medications", "medicine", "medicines", "history", "past", "dawa", "dawai", "dava", "davai", "itihas", "pehle", "दवा", "दवाई", "इतिहास", "पहले"].includes(w)
-  );
-  if (asksHistory) {
-    if (isHindiScript) {
-      return `डॉक्टर, मेरे केस की डिटेल्स और हिस्ट्री यह है: ${history}`;
-    }
-    if (isHinglish) {
-      return `Doctor, mere case ki details aur history yeh hai: ${history}`;
-    }
-    return `Here are my medical history details, doctor: ${history}`;
-  }
-
-  // 4. PAIN / DISCOMFORT
+  // 7. PAIN / DISCOMFORT
   const asksPain = words.some(w => 
     ["pain", "pains", "painless", "hurt", "hurts", "ache", "aches", "aching", "burn", "burning", "sting", "stinging", "dard", "jalan", "taklif", "दर्द", "जलन", "तकलीफ"].includes(w)
   );
@@ -129,7 +189,7 @@ export function getMockResponse(
     }
   }
 
-  // 5. FEVER / INFECTION
+  // 8. FEVER / INFECTION
   const asksFever = words.some(w => 
     ["fever", "fevers", "temp", "temperature", "hot", "bukhar", "garam", "बुखार", "गर्म"].includes(w)
   );
@@ -154,7 +214,7 @@ export function getMockResponse(
     }
   }
 
-  // 6. SMOKING / TOBACCO
+  // 9. SMOKING / TOBACCO
   const asksSmoking = words.some(w => 
     ["smoke", "smoked", "smoking", "tobacco", "cigarette", "cigarettes", "bidi", "beedi", "tambaku", "धूम्रपान", "तम्बाकू", "सिगरेट", "बीड़ी"].includes(w)
   );
