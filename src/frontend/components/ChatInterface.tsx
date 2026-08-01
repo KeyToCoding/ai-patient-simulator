@@ -225,7 +225,7 @@ export default function ChatInterface({
   return (
     <div className="bg-white dark:bg-slate-900 rounded-2xl border border-slate-200 dark:border-slate-800 shadow-sm flex flex-col h-full overflow-hidden">
       {/* Chat Header */}
-      <div className="px-6 py-4 bg-slate-50 dark:bg-slate-850/50 border-b border-slate-200 dark:border-slate-800 flex justify-between items-center">
+      <div className="px-6 py-4 bg-slate-50 dark:bg-slate-800/80 border-b border-slate-200 dark:border-slate-800 flex justify-between items-center">
         <div>
           <h3 className="font-semibold text-slate-800 dark:text-slate-100 flex items-center">
             <span className="w-2.5 h-2.5 rounded-full bg-teal-500 mr-2 animate-pulse"></span>
@@ -263,7 +263,7 @@ export default function ChatInterface({
       <div className="flex-1 p-6 overflow-y-auto space-y-4 bg-slate-50/50 dark:bg-slate-950/10">
         {messages.length === 0 ? (
           <div className="flex flex-col items-center justify-center h-full text-center space-y-3 p-6">
-            <div className="w-12 h-12 rounded-2xl bg-teal-50 dark:bg-teal-950/30 text-teal-655 dark:text-teal-400 flex items-center justify-center">
+            <div className="w-12 h-12 rounded-2xl bg-teal-50 dark:bg-teal-950/30 text-teal-600 dark:text-teal-400 flex items-center justify-center">
               <Volume2 className="w-6 h-6" />
             </div>
             <div className="max-w-sm">
@@ -354,7 +354,7 @@ export default function ChatInterface({
       )}
 
       {/* Chat Input Area */}
-      <div className="p-4 bg-slate-50 dark:bg-slate-850 border-t border-slate-200 dark:border-slate-800">
+      <div className="p-4 bg-slate-50 dark:bg-slate-800 border-t border-slate-200 dark:border-slate-800">
         <form onSubmit={handleSend} className="flex items-center space-x-3">
           {/* Hold to Speak Button */}
           <button
@@ -381,7 +381,7 @@ export default function ChatInterface({
               className={`px-2.5 py-1 rounded-lg font-bold transition-all ${
                 speechLang === "en-IN"
                   ? "bg-teal-600 text-white shadow-sm"
-                  : "text-slate-450 dark:text-slate-400 hover:text-slate-700 dark:hover:text-slate-200"
+                  : "text-slate-400 dark:text-slate-400 hover:text-slate-700 dark:hover:text-slate-200"
               }`}
               title="Set mic accent to English (India)"
             >
@@ -412,7 +412,7 @@ export default function ChatInterface({
                 ? `Listening in ${speechLang === "hi-IN" ? "Hindi" : "English India"}...`
                 : `Ask ${firstName} a question (Hindi/English)...`
             }
-            className="flex-1 bg-white dark:bg-slate-850 border border-slate-200 dark:border-slate-700 text-slate-850 dark:text-slate-100 text-sm rounded-xl px-4 py-3 focus:outline-none focus:ring-2 focus:ring-teal-500/20 focus:border-teal-500 transition-all placeholder-slate-400 dark:placeholder-slate-500"
+            className="flex-1 bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-slate-800 dark:text-slate-100 text-sm rounded-xl px-4 py-3 focus:outline-none focus:ring-2 focus:ring-teal-500/20 focus:border-teal-500 transition-all placeholder-slate-400 dark:placeholder-slate-500"
           />
 
           {/* Send Button */}
@@ -428,7 +428,7 @@ export default function ChatInterface({
           <span className="text-[10px] text-slate-400 dark:text-slate-500">
             Tip: Press HI to speak in Hindi/Hinglish. Microphone requires a secure domain (e.g. localhost).
           </span>
-          <span className="text-[10px] font-semibold text-teal-650 dark:text-teal-400">
+          <span className="text-[10px] font-semibold text-teal-600 dark:text-teal-400">
             Active patient: {firstName} ({patientGender})
           </span>
         </div>

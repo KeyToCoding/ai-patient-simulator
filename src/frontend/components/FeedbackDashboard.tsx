@@ -195,7 +195,7 @@ export default function FeedbackDashboard({
 
           <button
             onClick={onRestart}
-            className="px-4 py-2.5 bg-white dark:bg-slate-800 hover:bg-slate-50 dark:hover:bg-slate-700/50 border border-slate-200 dark:border-slate-700 text-slate-700 dark:text-slate-350 text-sm font-semibold rounded-xl transition-all flex items-center space-x-2"
+            className="px-4 py-2.5 bg-white dark:bg-slate-800 hover:bg-slate-50 dark:hover:bg-slate-700/50 border border-slate-200 dark:border-slate-700 text-slate-700 dark:text-slate-300 text-sm font-semibold rounded-xl transition-all flex items-center space-x-2"
           >
             <RefreshCw className="w-4 h-4" />
             <span>Start New Case</span>
@@ -312,7 +312,7 @@ export default function FeedbackDashboard({
             </ul>
           </div>
           <div className="mt-4 pt-4 border-t border-slate-100 dark:border-slate-800 text-[11px] text-slate-400">
-            Total Dialogue Turn Count: <span className="font-bold text-slate-600 dark:text-slate-350">{messages.length} lines</span>
+            Total Dialogue Turn Count: <span className="font-bold text-slate-600 dark:text-slate-300">{messages.length} lines</span>
           </div>
         </div>
       </div>
@@ -355,7 +355,7 @@ export default function FeedbackDashboard({
       {/* Transcript Section */}
       <div className="bg-white dark:bg-slate-900 rounded-2xl border border-slate-200 dark:border-slate-800 shadow-sm p-6">
         <h3 className="text-sm font-semibold text-slate-800 dark:text-slate-200 mb-4 flex items-center">
-          <FileText className="w-4.5 h-4.5 mr-1.5 text-teal-650" />
+          <FileText className="w-4.5 h-4.5 mr-1.5 text-teal-600" />
           Consultation Transcript Log
         </h3>
         <div className="max-h-80 overflow-y-auto space-y-3 border border-slate-100 dark:border-slate-800 rounded-xl p-4 bg-slate-50/50 dark:bg-slate-950/10">

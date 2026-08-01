@@ -208,7 +208,7 @@ export default function PatientFile({
                   <span className="w-1.5 h-1.5 rounded-full bg-rose-500 mr-1"></span>
                   HR (BPM): {pulse}
                 </span>
-                <span className="flex items-center text-teal-650 dark:text-teal-400">
+                <span className="flex items-center text-teal-600 dark:text-teal-400">
                   <span className="w-1.5 h-1.5 rounded-full bg-teal-500 mr-1"></span>
                   SYS BP (mmHg): {systolic}
                 </span>
@@ -252,7 +252,7 @@ export default function PatientFile({
                 <circle cx="300" cy={getBpY(bpHistory[bpHistory.length - 1])} r="2.5" fill="#06b6d4" />
               </svg>
             </div>
-            <div className="flex justify-between items-center text-[7px] text-slate-450 dark:text-slate-500 font-bold uppercase tracking-wide mt-1">
+            <div className="flex justify-between items-center text-[7px] text-slate-400 dark:text-slate-500 font-bold uppercase tracking-wide mt-1">
               <span>-40 seconds</span>
               <span className="flex items-center text-slate-400">
                 <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 mr-1 animate-pulse"></span>
@@ -272,7 +272,7 @@ export default function PatientFile({
             Chief Complaint (मुख्य शिकायत)
           </h3>
           <div className="p-3 bg-rose-50/50 dark:bg-rose-950/10 border border-rose-100/50 dark:border-rose-900/20 rounded-xl">
-            <p className="text-xs font-bold text-rose-800 dark:text-rose-455">
+            <p className="text-xs font-bold text-rose-800 dark:text-rose-400">
               {complaint}
             </p>
           </div>
@@ -284,8 +284,8 @@ export default function PatientFile({
             <FileText className="w-3.5 h-3.5 mr-1 text-teal-500" />
             Clinical Notes (मरीज का इतिहास)
           </h3>
-          <div className="bg-slate-50 dark:bg-slate-855 p-3.5 rounded-xl border border-slate-100 dark:border-slate-800 space-y-2.5">
-            <p className="text-xs text-slate-600 dark:text-slate-350 leading-relaxed font-medium">
+          <div className="bg-slate-50 dark:bg-slate-800 p-3.5 rounded-xl border border-slate-100 dark:border-slate-800 space-y-2.5">
+            <p className="text-xs text-slate-600 dark:text-slate-300 leading-relaxed font-medium">
               {history}
             </p>
             {differentials && differentials.length > 0 && (
@@ -307,7 +307,7 @@ export default function PatientFile({
         {stgGuideline && (
           <div className="space-y-1.5">
             <h3 className="text-xs font-bold text-slate-400 dark:text-slate-500 uppercase tracking-wider flex items-center">
-              <ShieldCheck className="w-3.5 h-3.5 mr-1 text-teal-650" />
+              <ShieldCheck className="w-3.5 h-3.5 mr-1 text-teal-600" />
               STG & ICMR Guidelines (मानक नैदानिक ​​निर्देश)
             </h3>
             <div className="p-3.5 bg-teal-50/50 dark:bg-teal-950/10 border border-teal-100 dark:border-teal-900/30 rounded-xl">
@@ -326,7 +326,7 @@ export default function PatientFile({
             </span>
             <span className={`inline-flex items-center px-2 py-0.5 rounded-lg text-[10px] font-bold border ${
               allergies.toLowerCase().includes("none")
-                ? "bg-slate-100 text-slate-800 dark:bg-slate-800 dark:text-slate-350 border-slate-200 dark:border-slate-700"
+                ? "bg-slate-100 text-slate-800 dark:bg-slate-800 dark:text-slate-300 border-slate-200 dark:border-slate-700"
                 : "bg-amber-100 text-amber-800 dark:bg-amber-900/20 dark:text-amber-450 border-amber-200 dark:border-amber-900/30"
             }`}>
               {allergies}
@@ -343,9 +343,9 @@ export default function PatientFile({
         </div>
 
         {/* Bilingual Medical Glossary */}
-        <div className="bg-slate-50 dark:bg-slate-850 p-3 rounded-xl border border-slate-100 dark:border-slate-800 space-y-1.5">
+        <div className="bg-slate-50 dark:bg-slate-800 p-3 rounded-xl border border-slate-100 dark:border-slate-800 space-y-1.5">
           <h4 className="text-[10px] font-bold text-slate-500 dark:text-slate-400 uppercase flex items-center">
-            <HelpCircle className="w-3 h-3 mr-1 text-teal-650" />
+            <HelpCircle className="w-3 h-3 mr-1 text-teal-600" />
             Medical Glossary (शब्दावली)
           </h4>
           <div className="grid grid-cols-2 gap-x-3 gap-y-1 text-[9px] font-semibold text-slate-500 dark:text-slate-400">
@@ -358,7 +358,7 @@ export default function PatientFile({
       </div>
 
       {/* Patient Footer */}
-      <div className="bg-slate-50 dark:bg-slate-855 p-3.5 border-t border-slate-200 dark:border-slate-850 text-center text-[9px] text-slate-400 dark:text-slate-500 font-mono">
+      <div className="bg-slate-50 dark:bg-slate-800 p-3.5 border-t border-slate-200 dark:border-slate-700 text-center text-[9px] text-slate-400 dark:text-slate-500 font-mono">
         ELECTRONIC HEALTH RECORD • SECURE ACCESS ONLY
       </div>
     </div>

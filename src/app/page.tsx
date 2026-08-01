@@ -212,7 +212,7 @@ export default function Home() {
   const activeProfile = PATIENTS[activePatientIndex];
 
   return (
-    <div className="min-h-screen bg-slate-50 dark:bg-slate-950 text-slate-800 dark:text-slate-100 flex flex-col font-sans transition-colors duration-300">
+    <div className="h-dvh overflow-hidden bg-slate-50 dark:bg-slate-955 text-slate-800 dark:text-slate-100 flex flex-col font-sans transition-colors duration-300">
       {/* Clinical Dashboard Navigation */}
       <header className="bg-white dark:bg-slate-900 border-b border-slate-200 dark:border-slate-800 py-4 px-6 sticky top-0 z-10 shadow-sm">
         <div className="max-w-7xl mx-auto flex items-center justify-between">
@@ -236,8 +236,8 @@ export default function Home() {
           {/* Active stats & Controls */}
           <div className="flex items-center space-x-3">
             {/* Session Timer */}
-            <div className="bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300 px-3.5 py-2 rounded-xl text-xs font-semibold flex items-center space-x-2 border border-slate-200 dark:border-slate-750">
-              <Clock className="w-4 h-4 text-teal-650" />
+            <div className="bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300 px-3.5 py-2 rounded-xl text-xs font-semibold flex items-center space-x-2 border border-slate-200 dark:border-slate-700">
+              <Clock className="w-4 h-4 text-teal-600" />
               <span>Session: {formatTime(elapsedTime)}</span>
             </div>
 
@@ -266,7 +266,7 @@ export default function Home() {
       </header>
 
       {/* Main Content Workspace */}
-      <main className="flex-1 max-w-7xl w-full mx-auto p-4 md:p-6 flex flex-col">
+      <main className={`flex-1 max-w-7xl w-full mx-auto p-4 md:p-6 flex flex-col min-h-0 ${viewMode === "simulation" ? "overflow-hidden" : "overflow-y-auto"}`}>
         {apiError && (
           <div className="mb-4 p-4 bg-rose-50 dark:bg-rose-950/20 text-rose-600 dark:text-rose-455 text-sm rounded-xl border border-rose-100 dark:border-rose-900/30 flex items-start space-x-2">
             <AlertCircle className="w-5 h-5 flex-shrink-0 mt-0.5" />
@@ -293,7 +293,7 @@ export default function Home() {
                 onClick={() => setMobileTab("file")}
                 className={`flex-1 py-2 text-center text-xs font-semibold rounded-lg transition-all ${
                   mobileTab === "file"
-                    ? "bg-teal-650 text-white shadow-sm"
+                    ? "bg-teal-600 text-white shadow-sm"
                     : "text-slate-500 dark:text-slate-400"
                 }`}
               >
@@ -317,7 +317,7 @@ export default function Home() {
               <div
                 className={`${
                   mobileTab === "file" ? "flex" : "hidden"
-                } md:flex flex-col md:col-span-1 min-h-[300px] md:h-full space-y-3`}
+                } md:flex flex-col md:col-span-1 h-full min-h-0 space-y-3`}
               >
                 {/* Visual Panels Switcher */}
                 <div className="flex bg-white dark:bg-slate-900 p-1 rounded-xl border border-slate-200 dark:border-slate-800 text-[11px] font-bold shadow-sm">
@@ -326,7 +326,7 @@ export default function Home() {
                     className={`flex-1 py-2 text-center rounded-lg transition-all ${
                       leftPanelMode === "chart"
                         ? "bg-teal-600 text-white shadow-sm"
-                        : "text-slate-550 dark:text-slate-400 hover:text-slate-700 dark:hover:text-slate-200"
+                        : "text-slate-500 dark:text-slate-400 hover:text-slate-700 dark:hover:text-slate-200"
                     }`}
                   >
                     Active Chart
@@ -336,7 +336,7 @@ export default function Home() {
                     className={`flex-1 py-2 text-center rounded-lg transition-all ${
                       leftPanelMode === "list"
                         ? "bg-teal-600 text-white shadow-sm"
-                        : "text-slate-550 dark:text-slate-400 hover:text-slate-700 dark:hover:text-slate-200"
+                        : "text-slate-500 dark:text-slate-400 hover:text-slate-700 dark:hover:text-slate-200"
                     }`}
                   >
                     Cases Directory ({PATIENTS.length})
@@ -381,7 +381,7 @@ export default function Home() {
                             className={`p-3 rounded-xl border text-left cursor-pointer transition-all ${
                               activePatientIndex === idx
                                 ? "bg-teal-50/50 dark:bg-teal-950/20 border-teal-500 shadow-sm shadow-teal-500/5 ring-1 ring-teal-500/30"
-                                : "bg-slate-50 hover:bg-slate-100/70 dark:bg-slate-850 dark:hover:bg-slate-800/80 border-slate-200 dark:border-slate-800/75"
+                                : "bg-slate-50 hover:bg-slate-100/70 dark:bg-slate-800 dark:hover:bg-slate-700/80 border-slate-200 dark:border-slate-800/75"
                             }`}
                           >
                             <div className="flex justify-between items-start">
@@ -415,7 +415,7 @@ export default function Home() {
               <div
                 className={`${
                   mobileTab === "chat" ? "flex" : "hidden"
-                } md:flex flex-col md:col-span-2 min-h-[300px] md:h-full`}
+                } md:flex flex-col md:col-span-2 h-full min-h-0`}
               >
                 <ChatInterface
                   messages={messages}
@@ -468,7 +468,7 @@ export default function Home() {
                     const idx = parseInt(e.target.value);
                     handlePatientChange(idx);
                   }}
-                  className="w-full bg-slate-50 dark:bg-slate-850 border border-slate-200 dark:border-slate-700 text-slate-855 dark:text-slate-100 text-xs rounded-xl px-3 py-2.5 focus:outline-none focus:ring-2 focus:ring-teal-500/20 focus:border-teal-500 transition-all font-semibold"
+                  className="w-full bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-slate-800 dark:text-slate-100 text-xs rounded-xl px-3 py-2.5 focus:outline-none focus:ring-2 focus:ring-teal-500/20 focus:border-teal-500 transition-all font-semibold"
                 >
                   {PATIENTS.map((p, idx) => (
                     <option key={p.id} value={idx}>
@@ -489,7 +489,7 @@ export default function Home() {
                     setSelectedVoiceName(e.target.value);
                     localStorage.setItem("selected_voice_name", e.target.value);
                   }}
-                  className="w-full bg-slate-50 dark:bg-slate-855 border border-slate-205 dark:border-slate-700 text-slate-855 dark:text-slate-100 text-xs rounded-xl px-3 py-2.5 focus:outline-none focus:ring-2 focus:ring-teal-500/20 focus:border-teal-500 transition-all font-semibold"
+                  className="w-full bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-slate-800 dark:text-slate-100 text-xs rounded-xl px-3 py-2.5 focus:outline-none focus:ring-2 focus:ring-teal-500/20 focus:border-teal-500 transition-all font-semibold"
                 >
                   <option value="">Auto Accent Selector</option>
                   {availableVoices.map((v) => (
@@ -505,7 +505,7 @@ export default function Home() {
 
               {/* API Mode Toggle */}
               <div className="space-y-1.5">
-                <label className="block text-xs font-semibold text-slate-400 dark:text-slate-505 uppercase tracking-wider">
+                <label className="block text-xs font-semibold text-slate-400 dark:text-slate-500 uppercase tracking-wider">
                   Simulation Brain Source
                 </label>
                 <div className="grid grid-cols-2 gap-2">
@@ -514,11 +514,11 @@ export default function Home() {
                     className={`px-3 py-2 rounded-xl border text-xs font-semibold text-center transition-all ${
                       isMockMode
                         ? "bg-teal-50 dark:bg-teal-950/20 border-teal-500 text-teal-700 dark:text-teal-400"
-                        : "bg-slate-50 dark:bg-slate-800 border-slate-250 text-slate-500 hover:border-slate-300"
+                        : "bg-slate-50 dark:bg-slate-800 border-slate-200 text-slate-500 hover:border-slate-300"
                     }`}
                   >
                     Local Mock Simulator
-                    <span className="block text-[9px] font-normal text-slate-450 dark:text-slate-500 mt-0.5 font-sans">
+                    <span className="block text-[9px] font-normal text-slate-400 dark:text-slate-500 mt-0.5 font-sans">
                       No API Key required
                     </span>
                   </button>
@@ -528,11 +528,11 @@ export default function Home() {
                     className={`px-3 py-2 rounded-xl border text-xs font-semibold text-center transition-all ${
                       !isMockMode
                         ? "bg-teal-50 dark:bg-teal-950/20 border-teal-500 text-teal-700 dark:text-teal-400"
-                        : "bg-slate-50 dark:bg-slate-800 border-slate-250 text-slate-500 hover:border-slate-300"
+                        : "bg-slate-50 dark:bg-slate-800 border-slate-200 text-slate-500 hover:border-slate-300"
                     }`}
                   >
                     Gemini Live Patient
-                    <span className="block text-[9px] font-normal text-slate-450 dark:text-slate-500 mt-0.5 font-sans">
+                    <span className="block text-[9px] font-normal text-slate-400 dark:text-slate-500 mt-0.5 font-sans">
                       Uses Google AI Studio
                     </span>
                   </button>
@@ -550,7 +550,7 @@ export default function Home() {
                     value={apiKey}
                     onChange={(e) => setApiKey(e.target.value)}
                     placeholder="AIzaSy..."
-                    className="w-full bg-slate-50 dark:bg-slate-850 border border-slate-200 dark:border-slate-700 text-slate-850 dark:text-slate-100 text-xs rounded-xl px-3 py-2.5 focus:outline-none focus:ring-2 focus:ring-teal-500/20 focus:border-teal-500 transition-all"
+                    className="w-full bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-slate-800 dark:text-slate-100 text-xs rounded-xl px-3 py-2.5 focus:outline-none focus:ring-2 focus:ring-teal-500/20 focus:border-teal-500 transition-all"
                   />
                   <span className="block text-[10px] text-slate-400 dark:text-slate-500 leading-relaxed">
                     Don&apos;t have a key? Get one for free at{" "}
@@ -558,7 +558,7 @@ export default function Home() {
                       href="https://aistudio.google.com/"
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="text-teal-650 hover:underline inline-flex items-center"
+                      className="text-teal-600 hover:underline inline-flex items-center"
                     >
                       Google AI Studio <ChevronRight className="w-2.5 h-2.5" />
                     </a>
@@ -578,7 +578,7 @@ export default function Home() {
                 </div>
                 <button
                   onClick={() => handleVoiceToggle(!voiceEnabled)}
-                  className="text-slate-500 dark:text-slate-400 hover:text-teal-650 transition-colors"
+                  className="text-slate-500 dark:text-slate-400 hover:text-teal-600 transition-colors"
                 >
                   {voiceEnabled ? (
                     <ToggleRight className="w-10 h-10 text-teal-600" />
@@ -592,7 +592,7 @@ export default function Home() {
             <div className="flex space-x-2 pt-2">
               <button
                 onClick={() => setShowSettings(false)}
-                className="flex-1 px-4 py-2.5 bg-slate-100 hover:bg-slate-200 dark:bg-slate-800 dark:hover:bg-slate-750 text-slate-700 dark:text-slate-350 text-xs font-semibold rounded-xl transition-all"
+                className="flex-1 px-4 py-2.5 bg-slate-100 hover:bg-slate-200 dark:bg-slate-800 dark:hover:bg-slate-700 text-slate-700 dark:text-slate-300 text-xs font-semibold rounded-xl transition-all"
               >
                 Cancel
               </button>
