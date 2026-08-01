@@ -55,12 +55,14 @@ export function getMockResponse(
   const isHindiScript = detectedLang === "hindi-devanagari";
   const isHinglish = detectedLang === "hinglish";
 
+  // Tokenize the input string into lowercase alphanumeric and Devanagari words
+  const words = query.split(/[^a-zA-Z0-9\u0900-\u097F]/).filter(Boolean);
+
   // 1. GREETINGS
-  if (
-    query.includes("hello") || query.includes("hi ") || query.includes("morning") || query.includes("afternoon") ||
-    query.includes("namaste") || query.includes("pranam") || query.includes("kese") || query.includes("kaise") ||
-    query.includes("नमस्ते") || query.includes("प्रणाम") || query.includes("कैसे") || query.includes("कैसा")
-  ) {
+  const hasGreeting = words.some(w => 
+    ["hello", "hi", "namaste", "pranam", "kese", "kaise", "morning", "afternoon", "नमस्ते", "प्रणाम", "कैसे", "कैसा"].includes(w)
+  );
+  if (hasGreeting) {
     if (isHindiScript) {
       return `नमस्ते डॉक्टर। शुक्रिया। मेरा नाम ${firstName} है। मैं आज थोड़ा नर्वस हूँ।`;
     }
@@ -71,11 +73,14 @@ export function getMockResponse(
   }
 
   // 2. CHIEF COMPLAINT (What happened?)
-  if (
-    query.includes("bring you") || query.includes("wrong") || query.includes("happen") || query.includes("symptom") || query.includes("problem") ||
-    query.includes("kya hua") || query.includes("taklif") || query.includes("shikayat") || query.includes("dikkat") || query.includes("pareshani") || query.includes("bimari") ||
-    query.includes("क्या हुआ") || query.includes("तकलीफ") || query.includes("शिकायत") || query.includes("दिक्कत") || query.includes("परेशानी") || query.includes("बीमारी")
-  ) {
+  const asksComplaint = 
+    query.includes("bring you") || 
+    query.includes("brings you") ||
+    words.some(w => ["wrong", "happen", "happened", "symptom", "symptoms", "problem", "problems", "complaint", "taklif", "shikayat", "dikkat", "pareshani", "bimari", "तकलीफ", "शिकायत", "दिक्कत", "परेशानी", "बीमारी"].includes(w)) ||
+    (words.some(w => ["kya", "ky"].includes(w)) && (words.includes("hua") || words.includes("hai") || words.includes("dikkat") || words.includes("pareshani"))) ||
+    (words.includes("क्या") && (words.includes("हुआ") || words.includes("है") || words.includes("दिक्कत") || words.includes("परेशानी")));
+
+  if (asksComplaint) {
     if (isHindiScript) {
       return `डॉक्टर, मुझे यह परेशानी है: "${complaint}"। यह देख कर मैं बहुत घबरा ${isMale ? "गया" : "गई"} हूँ।`;
     }
@@ -86,11 +91,10 @@ export function getMockResponse(
   }
 
   // 3. HISTORY & MEDICATIONS
-  if (
-    query.includes("medication") || query.includes("medicine") || query.includes("history") || query.includes("past") ||
-    query.includes("dawa") || query.includes("dawai") || query.includes("itihas") || query.includes("pehle") ||
-    query.includes("दवा") || query.includes("दवाई") || query.includes("इतिहास") || query.includes("पहले")
-  ) {
+  const asksHistory = words.some(w => 
+    ["medication", "medications", "medicine", "medicines", "history", "past", "dawa", "dawai", "dava", "davai", "itihas", "pehle", "दवा", "दवाई", "इतिहास", "पहले"].includes(w)
+  );
+  if (asksHistory) {
     if (isHindiScript) {
       return `डॉक्टर, मेरे केस की डिटेल्स और हिस्ट्री यह है: ${history}`;
     }
@@ -101,11 +105,10 @@ export function getMockResponse(
   }
 
   // 4. PAIN / DISCOMFORT
-  if (
-    query.includes("pain") || query.includes("hurt") || query.includes("ache") || query.includes("burn") || query.includes("sting") ||
-    query.includes("dard") || query.includes("jalan") || query.includes("taklif") ||
-    query.includes("दर्द") || query.includes("जलन") || query.includes("तकलीफ")
-  ) {
+  const asksPain = words.some(w => 
+    ["pain", "pains", "painless", "hurt", "hurts", "ache", "aches", "aching", "burn", "burning", "sting", "stinging", "dard", "jalan", "taklif", "दर्द", "जलन", "तकलीफ"].includes(w)
+  );
+  if (asksPain) {
     const hasPain = complaint.toLowerCase().includes("pain") || complaint.toLowerCase().includes("dard") || history.toLowerCase().includes("pain") || history.toLowerCase().includes("dard") || complaint.toLowerCase().includes("दर्द") || history.toLowerCase().includes("दर्द");
     if (hasPain) {
       if (isHindiScript) {
@@ -127,11 +130,10 @@ export function getMockResponse(
   }
 
   // 5. FEVER / INFECTION
-  if (
-    query.includes("fever") || query.includes("temp") || query.includes("hot") ||
-    query.includes("bukhar") || query.includes("garam") ||
-    query.includes("बुखार") || query.includes("गर्म")
-  ) {
+  const asksFever = words.some(w => 
+    ["fever", "fevers", "temp", "temperature", "hot", "bukhar", "garam", "बुखार", "गर्म"].includes(w)
+  );
+  if (asksFever) {
     const hasFever = history.toLowerCase().includes("fever") || history.toLowerCase().includes("bukhar") || complaint.toLowerCase().includes("fever") || history.toLowerCase().includes("बुखार") || complaint.toLowerCase().includes("बुखार");
     if (hasFever) {
       if (isHindiScript) {
@@ -153,10 +155,10 @@ export function getMockResponse(
   }
 
   // 6. SMOKING / TOBACCO
-  if (
-    query.includes("smoke") || query.includes("tobacco") || query.includes("cigarette") || query.includes("bidi") || query.includes("tambaku") ||
-    query.includes("धूम्रपान") || query.includes("तम्बाकू") || query.includes("सिगरेट") || query.includes("बीड़ी")
-  ) {
+  const asksSmoking = words.some(w => 
+    ["smoke", "smoked", "smoking", "tobacco", "cigarette", "cigarettes", "bidi", "beedi", "tambaku", "धूम्रपान", "तम्बाकू", "सिगरेट", "बीड़ी"].includes(w)
+  );
+  if (asksSmoking) {
     const hasSmoking = history.toLowerCase().includes("smoke") || history.toLowerCase().includes("cigarette") || history.toLowerCase().includes("bidi") || history.toLowerCase().includes("धूम्रपान") || history.toLowerCase().includes("सिगरेट");
     if (hasSmoking) {
       if (isHindiScript) {
